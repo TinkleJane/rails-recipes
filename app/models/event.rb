@@ -3,7 +3,7 @@ class Event < ApplicationRecord
  validates_presence_of :name, :friendly_id
  before_validation :generate_friendly_id, :on => :create
  validates_uniqueness_of :friendly_id
- validtaes_format_of :friendly_id, :with => /\A[a-z0-9\-]+\z/
+ validates_format_of :friendly_id, :with => /\A[a-z0-9\-]+\z/
  def to_param
    self.friendly_id
  end
