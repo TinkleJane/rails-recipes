@@ -11,7 +11,6 @@ class Admin::EventsController < AdminController
   def new
     @event = Event.new
     @event.tickets.build
-    @event.tickets.build
   end
 
   def create

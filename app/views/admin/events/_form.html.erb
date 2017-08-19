@@ -43,10 +43,11 @@
   <%= f.text_field :friendly_id, :required => true, :class => "form-control" %>
   <p class="help-block">限小写英数字及横线，将作为网址的一部分</p>
 </div>
-
+<div class="form-group">
   <%= f.nested_fields_for :tickets do |ff| %>
     <fieldset style="border-left: 5px solid #bbb; margin-bottom: 10px; padding: 10px;">
       <legend>Ticket</legend>
+      <%= ff.remove_nested_fields_link "Remove Me", :class => "btn btn-danger", :ckeditor => {:uiColor => '#f7931e', :toolbar => 'mini'} %>
       <div class="form-group">
         <%= ff.label :name %>
         <%= ff.text_field :name, :class => "form-control" %>
@@ -59,17 +60,14 @@
 
       <div class="form-group">
         <%= ff.label :description %>
-        <%= ff.text_area :description, :class => "form-control" %>
+        <%= ff.cktext_area :description, ckeditor: {language: 'zh-CN'} %>
       </div>
     </fieldset>
-    <div class="col-md-12">
-
-      <%= ff.remove_nested_fields_link "remove", :class => "btn btn-danger" %>
-    </div>
   <% end %>
   <p class="text-right">
-    <%= f.add_nested_fields_link :tickets, "add new", :class => "btn btn-default" %>
+    <%= f.add_nested_fields_link :tickets, "Add new", :class => "btn btn-default" %>
   </p>
+</div>
 
 <script>
   $("#event_category_id").select2( { theme: "bootstrap"} );
