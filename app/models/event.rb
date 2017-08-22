@@ -5,6 +5,8 @@ class Event < ApplicationRecord
  validates_uniqueness_of :friendly_id
  validates_format_of :friendly_id, :with => /\A[a-z0-9\-]+\z/
  belongs_to :category, :optional => true
+ include RankedModel
+ ranks :row_order
 
  def to_param
    self.friendly_id
