@@ -11,7 +11,7 @@ class Registration < ApplicationRecord
   belongs_to :user, :optional => true
 
   before_validation :generate_uuid, :on => :create
-
+  validate :check_event_status, :on => :create
   def to_param
     self.uuid
   end
@@ -30,4 +30,9 @@ class Registration < ApplicationRecord
     current_step == 3 || status == "confirmed"  # 做到第三步，或最后状态是 confirmed 时需要验证
   end
 
+  def check_event_status
+    if self.event.status == "draft"
+      errors.add(:base, "活动尚未开始报名")
+    end
+  end
 end
